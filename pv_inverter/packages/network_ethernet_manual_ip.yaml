@@ -1,0 +1,7 @@
+ethernet:
+  manual_ip:
+    static_ip: ${ethernet_static_ip}
+    gateway: ${ethernet_gateway}
+    subnet: ${ethernet_subnet}
+    dns1: ${ethernet_dns1}
+    dns2: ${ethernet_dns2}

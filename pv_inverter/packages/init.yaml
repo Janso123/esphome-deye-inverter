@@ -1,4 +1,4 @@
-﻿# Copyright 2025 Lewa-Reka <lewareka.yt@gmail.com>
+# Copyright 2025 Lewa-Reka <lewareka.yt@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ substitutions:
   update_interval: 5s
 
 esphome:
+  min_version: "2025.12.0"
   name: "${name}"
   friendly_name: "${friendly_name}"
   comment: "${device_description} by Lewa-Reka https://github.com/Lewa-Reka/esphome-deye-inverter"
@@ -46,16 +47,6 @@ ota:
     id: ota_esphome
     password: ${ota_password}
 
-wifi:
-  ssid: ${wifi_ssid}
-  password: ${wifi_password}
-
-  ap:
-    ssid: "${friendly_name} Fallback Hotspot"
-    password: ${fallback_password}
-
-captive_portal:
-
 uart:
   id: modbus_uart
   baud_rate: ${baud_rate}
@@ -78,12 +69,6 @@ debug:
   update_interval: 60s
 
 sensor:
-  - platform: wifi_signal
-    name: "ESP WiFi Signal"
-    id: esp_wifi_signal
-    icon: mdi:wifi
-    update_interval: 60s
-    entity_category: diagnostic
   - platform: uptime
     name: ESP Uptime
     id: esp_uptime
@@ -114,22 +99,4 @@ sensor:
       unit_of_measurement: "MHz"
       filters:
         - multiply: 0.000001
-      entity_category: diagnostic
-
-text_sensor:
-  - platform: wifi_info
-    ip_address:
-      name: ESP IP Address
-      id: esp_ip_address
-      icon: mdi:ip-network
-      entity_category: diagnostic
-    ssid:
-      name: ESP WiFi SSID
-      id: esp_wifi_ssid
-      icon: mdi:access-point
-      entity_category: diagnostic
-    mac_address:
-      name: ESP Mac Address
-      id: esp_mac_address
-      icon: mdi:expansion-card
       entity_category: diagnostic

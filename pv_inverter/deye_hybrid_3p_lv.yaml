@@ -18,6 +18,25 @@ substitutions:
   device_description: "Deye Inverter SG0XLP3"
   modbus_controller_id: deye_modbus_controller
   baud_rate: "9600"
+  network_mode: "wifi"
+  ethernet_manual_ip_enabled: false
+  ethernet_use_address_enabled: false
+  ethernet_clk_pin: GPIO15
+  ethernet_mosi_pin: GPIO13
+  ethernet_miso_pin: GPIO14
+  ethernet_cs_pin: GPIO16
+  ethernet_interrupt_pin: GPIO12
+  ethernet_reset_pin: GPIO39
+  ethernet_static_ip: 192.168.1.50
+  ethernet_gateway: 192.168.1.1
+  ethernet_subnet: 255.255.255.0
+  ethernet_dns1: 1.1.1.1
+  ethernet_dns2: 8.8.8.8
+  ethernet_use_address: 192.168.1.50
+  network_wifi_package: !include packages/network_wifi.yaml
+  network_ethernet_package: !include packages/network_ethernet_w5500.yaml
+  network_ethernet_manual_ip_package: !include packages/network_ethernet_manual_ip.yaml
+  network_ethernet_use_address_package: !include packages/network_ethernet_use_address.yaml
   # Safe Mode Default parameters
   default_maximum_battery_charge_current: "140" # Amps
   default_max_sell_power: "12000" # Watts
@@ -26,17 +45,20 @@ substitutions:
   default_force_off_grid: "off" # "on", "off"
 
 packages:
-  init: !include packages/init.yaml
-  battery: !include packages/deye_hybrid_3p/battery.yaml
-  gen: !include packages/deye_hybrid_3p/gen.yaml
-  grid: !include packages/deye_hybrid_3p/grid.yaml
-  load: !include packages/deye_hybrid_3p/load.yaml
-  work_mode: !include packages/deye_hybrid_3p/work_mode.yaml
-  device: !include packages/deye_hybrid_3p/device.yaml
-  inverter: !include packages/deye_hybrid_3p/inverter.yaml
-  pv: !include packages/deye_hybrid_3p/pv.yaml
-  tou: !include packages/deye_hybrid_3p/tou.yaml
-  time_sync: !include packages/deye_hybrid_3p/time_sync.yaml
+  - !include packages/init.yaml
+  - ${ network_mode == "ethernet" and network_ethernet_package or network_wifi_package }
+  - ${ network_mode == "ethernet" and ethernet_manual_ip_enabled and network_ethernet_manual_ip_package or {} }
+  - ${ network_mode == "ethernet" and ethernet_use_address_enabled and network_ethernet_use_address_package or {} }
+  - !include packages/deye_hybrid_3p/battery.yaml
+  - !include packages/deye_hybrid_3p/gen.yaml
+  - !include packages/deye_hybrid_3p/grid.yaml
+  - !include packages/deye_hybrid_3p/load.yaml
+  - !include packages/deye_hybrid_3p/work_mode.yaml
+  - !include packages/deye_hybrid_3p/device.yaml
+  - !include packages/deye_hybrid_3p/inverter.yaml
+  - !include packages/deye_hybrid_3p/pv.yaml
+  - !include packages/deye_hybrid_3p/tou.yaml
+  - !include packages/deye_hybrid_3p/time_sync.yaml
 
 script:
   - id: set_safe_modbus_registers

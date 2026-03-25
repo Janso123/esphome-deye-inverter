@@ -1,0 +1,2 @@
+ethernet:
+  use_address: ${ethernet_use_address}

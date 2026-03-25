@@ -22,3 +22,8 @@ To set the baud rate on your Deye inverter:
 
 
 **Note**: After saving, the screen will turn off and a red LED alarm will flash - this is normal behavior. Everything should return to normal after a moment.
+
+## Controller Templates
+
+- **Waveshare ESP32-S3-RS485-CAN**: ready-made device templates with onboard RS485 and Wi-Fi networking
+- **Waveshare ESP32-S3-POE-ETH-8DI-8DO**: ready-made device templates with onboard RS485, `W5500` Ethernet, PoE support, and optional fallback to Wi-Fi by changing `network_mode`

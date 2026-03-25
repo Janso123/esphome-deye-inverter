@@ -23,6 +23,8 @@ limitations under the License.
 
 An ESPHome-based solution for monitoring and controlling Deye photovoltaic inverters via Modbus RTU communication. This project provides comprehensive integration with Home Assistant, enabling real-time monitoring and control of solar power systems.
 
+The project now supports both **Wi-Fi** and **W5500 Ethernet** builds through a selectable `network_mode`, and includes ready-made templates for the **Waveshare ESP32-S3-POE-ETH-8DI-8DO** industrial board.
+
 Installation & Presentation: https://youtu.be/iJjsA_MzmnE [PL]
 
 ## 📚 Documentation
@@ -31,6 +33,7 @@ Installation & Presentation: https://youtu.be/iJjsA_MzmnE [PL]
 - **[Features & Capabilities](docs/FEATURES.md)**: Detailed overview of features, safety mechanisms, and monitoring capabilities.
 - **[Installation Guide](docs/INSTALLATION.md)**: Hardware requirements, wiring diagrams, and step-by-step installation instructions.
 - **[Configuration](docs/CONFIGURATION.md)**: Configuration options, parameters, and update instructions.
+- **Waveshare board templates**: `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/` for Ethernet-first industrial deployments.
 - **[Troubleshooting](docs/TROUBLESHOOTING.md)**: Common issues and solutions.
 - **[Contributing](docs/CONTRIBUTING.md)**: Guidelines for contributing to the project.
 

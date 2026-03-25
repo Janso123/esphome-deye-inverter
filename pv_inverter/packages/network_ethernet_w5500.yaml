@@ -1,0 +1,26 @@
+ethernet:
+  type: W5500
+  clk_pin: ${ethernet_clk_pin}
+  mosi_pin: ${ethernet_mosi_pin}
+  miso_pin: ${ethernet_miso_pin}
+  cs_pin: ${ethernet_cs_pin}
+  interrupt_pin: ${ethernet_interrupt_pin}
+  reset_pin: ${ethernet_reset_pin}
+
+text_sensor:
+  - platform: ethernet_info
+    ip_address:
+      name: ESP IP Address
+      id: esp_ip_address
+      icon: mdi:ip-network
+      entity_category: diagnostic
+    dns_address:
+      name: ESP DNS Address
+      id: esp_dns_address
+      icon: mdi:dns
+      entity_category: diagnostic
+    mac_address:
+      name: ESP Mac Address
+      id: esp_mac_address
+      icon: mdi:expansion-card
+      entity_category: diagnostic

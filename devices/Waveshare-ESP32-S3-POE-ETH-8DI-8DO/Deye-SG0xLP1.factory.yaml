@@ -1,0 +1,23 @@
+packages:
+  deye-inverter: !include Deye-SG0xLP1.yaml
+
+ota:
+  - platform: http_request
+    id: ota_http_request
+  - id: !extend ota_esphome
+    password: !remove
+
+update:
+  - platform: http_request
+    id: update_http_request
+    name: Firmware Update
+    source: https://lewa-reka.github.io/esphome-deye-inverter/firmware/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/Deye-SG0xLP1/manifest.json
+
+http_request:
+
+api:
+  encryption: !remove
+
+dashboard_import:
+  import_full_config: false
+  package_import_url: github://Lewa-Reka/esphome-deye-inverter/devices/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/Deye-SG0xLP1.yaml@main

@@ -18,6 +18,23 @@ substitutions:
   api_key: !secret pv_inverter_api_key
   ota_password: !secret pv_inverter_ota_password
   fallback_password: !secret pv_inverter_fallback_password
+  network_mode: "wifi" # "wifi" or "ethernet"
+
+  # Required only for W5500-based Ethernet boards.
+  # ethernet_clk_pin: GPIO15
+  # ethernet_mosi_pin: GPIO13
+  # ethernet_miso_pin: GPIO14
+  # ethernet_cs_pin: GPIO16
+  # ethernet_interrupt_pin: GPIO12
+  # ethernet_reset_pin: GPIO39
+  # ethernet_manual_ip_enabled: true
+  # ethernet_static_ip: 192.168.1.50
+  # ethernet_gateway: 192.168.1.1
+  # ethernet_subnet: 255.255.255.0
+  # ethernet_dns1: 1.1.1.1
+  # ethernet_dns2: 8.8.8.8
+  # ethernet_use_address_enabled: true
+  # ethernet_use_address: 192.168.1.50
 
   modbus_inverter_address: "0x01" # Default Modbus address, should be changed to match inverter settings
 
