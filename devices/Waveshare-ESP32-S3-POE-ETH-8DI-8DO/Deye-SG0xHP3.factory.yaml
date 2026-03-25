@@ -1,5 +1,5 @@
 packages:
-  deye-inverter: !include Deye-SG0xHP3.yaml
+  deye-inverter: !include Deye-SG0xHP3.factory.base.yaml
 
 ota:
   - platform: http_request
@@ -14,6 +14,18 @@ update:
     source: https://lewa-reka.github.io/esphome-deye-inverter/firmware/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/Deye-SG0xHP3/manifest.json
 
 http_request:
+
+wifi: !remove
+captive_portal: !remove
+
+ethernet:
+  type: W5500
+  clk_pin: ${ethernet_clk_pin}
+  mosi_pin: ${ethernet_mosi_pin}
+  miso_pin: ${ethernet_miso_pin}
+  cs_pin: ${ethernet_cs_pin}
+  interrupt_pin: ${ethernet_interrupt_pin}
+  reset_pin: ${ethernet_reset_pin}
 
 api:
   encryption: !remove
