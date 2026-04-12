@@ -27,3 +27,4 @@ To set the baud rate on your Deye inverter:
 
 - **Waveshare ESP32-S3-RS485-CAN**: ready-made device templates with onboard RS485 and Wi-Fi networking
 - **Waveshare ESP32-S3-POE-ETH-8DI-8DO**: ready-made device templates with onboard RS485, `W5500` Ethernet, PoE support, and optional fallback to Wi-Fi by changing `network_mode`
+- **Waveshare ESP32-S3-POE-ETH-8DI-8RO-C**: same networking and RS485 setup as the 8DI-8DO template; onboard outputs are relays instead of open-collector digital outputs

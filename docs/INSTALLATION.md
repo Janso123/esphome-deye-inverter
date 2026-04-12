@@ -2,7 +2,7 @@
 
 ## 🛠️ Hardware Requirements
 
-- **ESP Development Board** (e.g., ESP32-DevKit V1) or **Waveshare ESP32-S3-POE-ETH-8DI-8DO**
+- **ESP Development Board** (e.g., ESP32-DevKit V1) or **Waveshare ESP32-S3-POE-ETH-8DI-8DO** / **ESP32-S3-POE-ETH-8DI-8RO-C**
 - **RS485 to TTL Converter** for generic ESP32 boards
 - **Deye Inverter** with Modbus RTU support
 - **Connecting Cables** (for RS485 communication)
@@ -21,7 +21,7 @@ GND         -> GND             -> GND (Modbus)
 
 **Note**: Some RS485 converters may require a flow control pin. Uncomment and configure the `flow_control_pin` in the main configuration if needed.
 
-If you are using the **Waveshare ESP32-S3-POE-ETH-8DI-8DO**, the RS485 transceiver is already onboard. Use the dedicated device templates under `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/` and connect the inverter directly to the board's RS485 terminal.
+If you are using the **Waveshare ESP32-S3-POE-ETH-8DI-8DO** or **ESP32-S3-POE-ETH-8DI-8RO-C**, the RS485 transceiver is already onboard. Use the dedicated device templates under `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/` or `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8RO-C/` and connect the inverter directly to the board's RS485 terminal.
 
 ## 🌐 Network Modes
 
@@ -32,9 +32,9 @@ The project now supports two mutually exclusive ESPHome network modes:
 
 **Important**: ESPHome cannot use `wifi:` and `ethernet:` at the same time in one build. The selected `network_mode` decides which package is compiled.
 
-### Waveshare ESP32-S3-POE-ETH-8DI-8DO Ethernet Pins
+### Waveshare ESP32-S3-POE-ETH-8DI-8DO / ESP32-S3-POE-ETH-8DI-8RO-C Ethernet Pins
 
-The ready-made Waveshare templates in this repository already use the official `W5500` mapping:
+The ready-made Waveshare PoE Ethernet templates in this repository already use the official `W5500` mapping (identical on both boards):
 
 - `GPIO15` → `ETH_SCLK`
 - `GPIO13` → `ETH_MOSI`
@@ -56,7 +56,7 @@ This is the easiest way to get started if you're using Home Assistant.
 
 #### Prerequisites
 - [Home Assistant](https://www.home-assistant.io/) with Add-on store access
-- ESP development board or Waveshare ESP32-S3-POE-ETH-8DI-8DO
+- ESP development board or Waveshare ESP32-S3-POE-ETH-8DI-8DO / ESP32-S3-POE-ETH-8DI-8RO-C
 - RS485 to TTL converter for generic ESP32 boards
 
 #### Step 1: Install ESPHome Add-on
@@ -86,9 +86,9 @@ This is the easiest way to get started if you're using Home Assistant.
 2. Click **"EDIT"** on your newly created device
 3. **Replace the entire content** with one of the repository templates:
    - [`pv-inverter.yaml`](../pv-inverter.yaml) for a generic ESP32 + external RS485 adapter
-   - `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/Deye-SG0xLP1.yaml`
-   - `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/Deye-SG0xLP3.yaml`
-   - `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/Deye-SG0xHP3.yaml`
+   - `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/Deye-SG0xLP1.yaml` (or the same filenames under `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8RO-C/`)
+   - `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/Deye-SG0xLP3.yaml` (or `...8RO-C/...`)
+   - `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/Deye-SG0xHP3.yaml` (or `...8RO-C/...`)
 4. Set `network_mode` to `"wifi"` or `"ethernet"` in the selected YAML
 5. If you use Ethernet on a non-Waveshare board, update the `ethernet_*` pin substitutions to match your `W5500` wiring
 6. Click **"SAVE"** and then **"INSTALL"**
@@ -117,9 +117,9 @@ If you prefer using command line or don't have Home Assistant:
 
 2. **Download Configuration**:
    ```bash
-   wget https://raw.githubusercontent.com/Lewa-Reka/esphome-deye-inverter/main/pv-inverter.yaml
+   wget https://raw.githubusercontent.com/Janso123/esphome-deye-inverter/main/pv-inverter.yaml
    ```
-   Or start from one of the device templates under `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/` if you are using the Waveshare industrial board.
+   Or start from one of the device templates under `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8DO/` or `devices/Waveshare-ESP32-S3-POE-ETH-8DI-8RO-C/` if you are using the Waveshare industrial board.
 
 3. **Create secrets.yaml**:
    ```yaml

@@ -54,8 +54,8 @@
 ### Default Hardware Configuration
 
 - **Generic ESP32 + RS485 adapter**: GPIO17 (TX), GPIO16 (RX), optional flow control on GPIO4
-- **Waveshare ESP32-S3-POE-ETH-8DI-8DO**: GPIO17 (TX), GPIO18 (RX), flow control on GPIO21
-- **Default Ethernet pin mapping for Waveshare `W5500`**: GPIO15 / GPIO13 / GPIO14 / GPIO16 / GPIO12 / GPIO39
+- **Waveshare ESP32-S3-POE-ETH-8DI-8DO** and **ESP32-S3-POE-ETH-8DI-8RO-C**: GPIO17 (TX), GPIO18 (RX), flow control on GPIO21
+- **Default Ethernet pin mapping for Waveshare `W5500` (both PoE industrial boards above)**: GPIO15 / GPIO13 / GPIO14 / GPIO16 / GPIO12 / GPIO39
 - **Baud Rate**: 9600
 - **Board**: ESP32-DevKit v1 by default, configurable per device template
 

@@ -1,4 +1,4 @@
-# Copyright 2026 Lewa-Reka <lewareka.yt@gmail.com>
+# Copyright 2026 Janso123
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,13 +12,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Fork-specific templates in this directory (see README section About this fork).
+# Upstream: https://github.com/Lewa-Reka/esphome-deye-inverter (Apache-2.0).
+
+# Waveshare ESP32-S3-POE-ETH-8DI-8RO-C: 8 isolated digital inputs and 8 relay outputs.
+# W5500 Ethernet and RS485 GPIOs match ESP32-S3-POE-ETH-8DI-8DO.
+
 substitutions:
   api_key: ""
   ota_password: " "
   fallback_password: ""
   wifi_ssid: ""
   wifi_password: ""
-  network_mode: "wifi"
+  network_mode: "ethernet" # Change to "wifi" and fill Wi-Fi credentials to use wireless networking.
+
+  ethernet_clk_pin: GPIO15
+  ethernet_mosi_pin: GPIO13
+  ethernet_miso_pin: GPIO14
+  ethernet_cs_pin: GPIO16
+  ethernet_interrupt_pin: GPIO12
+  ethernet_reset_pin: GPIO39
+  ethernet_manual_ip_enabled: false
+  ethernet_use_address_enabled: false
+  # ethernet_static_ip: 192.168.1.50
+  # ethernet_gateway: 192.168.1.1
+  # ethernet_subnet: 255.255.255.0
+  # ethernet_dns1: 1.1.1.1
+  # ethernet_dns2: 8.8.8.8
+  # ethernet_use_address: 192.168.1.50
 
   modbus_inverter_address: "0x01" # Default Modbus address, should be changed to match inverter settings
 
@@ -33,10 +54,7 @@ substitutions:
   enable_sync_time: false # true, false - Enable time sync with HomeAssistant (Deye 3P inverters only)
 
 packages:
-  pv_inverter:
-    url: https://github.com/Janso123/esphome-deye-inverter
-    ref: main
-    files: pv_inverter/deye_hybrid_3p_lv.yaml
+  pv_inverter: !include ../../pv_inverter/deye_hybrid_3p_lv.yaml
 
 esphome:
   min_version: "2025.12.0"

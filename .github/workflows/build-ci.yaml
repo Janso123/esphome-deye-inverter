@@ -23,6 +23,8 @@ jobs:
           - deye_hybrid_1p_lv
           - waveshare_esp32_s3_poe_eth_8di_8do_1p
           - waveshare_esp32_s3_poe_eth_8di_8do_1p.factory
+          - waveshare_esp32_s3_poe_eth_8di_8ro_c_1p
+          - waveshare_esp32_s3_poe_eth_8di_8ro_c_1p.factory
 
         esphome-version:
           - stable

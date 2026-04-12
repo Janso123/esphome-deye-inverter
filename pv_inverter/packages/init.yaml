@@ -1,4 +1,5 @@
 # Copyright 2025 Lewa-Reka <lewareka.yt@gmail.com>
+# Modifications in this fork: Copyright 2026 Janso123 (ESPHome project name, comment, package/repo URLs in consuming YAML).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,9 +20,9 @@ esphome:
   min_version: "2025.12.0"
   name: "${name}"
   friendly_name: "${friendly_name}"
-  comment: "${device_description} by Lewa-Reka https://github.com/Lewa-Reka/esphome-deye-inverter"
+  comment: "${device_description} https://github.com/Janso123/esphome-deye-inverter"
   project:
-    name: "lewa-reka.deye-inverter"
+    name: "janso123.deye-inverter"
     version: "0.12.0"
 
 logger:
