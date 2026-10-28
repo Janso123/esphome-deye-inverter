@@ -17,13 +17,16 @@ substitutions:
   update_interval: 5s
 
 esphome:
-  min_version: "2025.12.0"
   name: "${name}"
   friendly_name: "${friendly_name}"
   comment: "${device_description} https://github.com/Janso123/esphome-deye-inverter"
+  min_version: "2026.9.0"
   project:
     name: "janso123.deye-inverter"
-    version: "0.14.0"
+    version: "0.15.0-rc"
+  devices:
+    - id: esp_board
+      name: ${friendly_name} ESP Board
 
 logger:
   level: WARN
@@ -46,7 +49,7 @@ api:
 ota:
   - platform: esphome
     id: ota_esphome
-    password: ${ota_password}
+    encryption: # reuses the api encryption key
 
 uart:
   id: modbus_uart
@@ -56,48 +59,12 @@ uart:
 modbus:
   id: modbus_1
   uart_id: modbus_uart
+  turnaround_time: 70ms
 
 modbus_controller:
   - id: ${modbus_controller_id}
     address: ${modbus_inverter_address}
     modbus_id: modbus_1
-    setup_priority: -10
+    setup_priority: -100
     update_interval: ${update_interval}
-    command_throttle: 60ms
     offline_skip_updates: 3
-
-debug:
-  update_interval: 60s
-
-sensor:
-  - platform: uptime
-    name: ESP Uptime
-    id: esp_uptime
-    type: seconds
-    icon: mdi:timer-check
-    update_interval: 60s
-    entity_category: diagnostic
-  - platform: debug
-    free:
-      name: ESP Heap Free
-      id: esp_heap_free
-      icon: mdi:memory
-      entity_category: diagnostic
-    block:
-      name: ESP Heap Max Block
-      id: esp_heap_max_block
-      icon: mdi:memory
-      entity_category: diagnostic
-    loop_time:
-      name: ESP Loop Time
-      id: esp_loop_time
-      icon: mdi:reload
-      entity_category: diagnostic
-    cpu_frequency:
-      name: ESP CPU Frequency
-      id: esp_cpu_frequency
-      icon: mdi:cpu-32-bit
-      unit_of_measurement: "MHz"
-      filters:
-        - multiply: 0.000001
-      entity_category: diagnostic

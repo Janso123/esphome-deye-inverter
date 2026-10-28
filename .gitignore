@@ -7,3 +7,7 @@
 pv-inv-local-test.yaml
 debug.log
 .DS_Store
+local.*
+.cursor/
+venv/
+.venv/

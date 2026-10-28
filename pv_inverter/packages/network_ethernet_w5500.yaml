@@ -10,17 +10,20 @@ ethernet:
 text_sensor:
   - platform: ethernet_info
     ip_address:
-      name: ESP IP Address
+      name: IP Address
+      device_id: esp_board
       id: esp_ip_address
       icon: mdi:ip-network
       entity_category: diagnostic
     dns_address:
-      name: ESP DNS Address
+      name: DNS Address
+      device_id: esp_board
       id: esp_dns_address
       icon: mdi:dns
       entity_category: diagnostic
     mac_address:
-      name: ESP Mac Address
+      name: Mac Address
+      device_id: esp_board
       id: esp_mac_address
       icon: mdi:expansion-card
       entity_category: diagnostic

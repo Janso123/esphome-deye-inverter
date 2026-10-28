@@ -80,7 +80,6 @@ This is the easiest way to get started if you're using Home Assistant.
    wifi_ssid: "YourWiFiSSID"
    wifi_password: "YourWiFiPassword"
    pv_inverter_api_key: "your-32-character-api-key"
-   pv_inverter_ota_password: "your-ota-password"
    pv_inverter_fallback_password: "your-fallback-password"
    ```
 2. Click **"EDIT"** on your newly created device
@@ -126,7 +125,6 @@ If you prefer using command line or don't have Home Assistant:
    wifi_ssid: "YourWiFiSSID"
    wifi_password: "YourWiFiPassword"
    pv_inverter_api_key: "your-32-character-api-key"
-   pv_inverter_ota_password: "your-ota-password"
    pv_inverter_fallback_password: "your-fallback-password"
    ```
    For Ethernet-first Waveshare templates, Wi-Fi credentials can stay empty unless you change `network_mode` back to `"wifi"`.
@@ -135,3 +133,23 @@ If you prefer using command line or don't have Home Assistant:
    ```bash
    esphome run pv-inverter.yaml
    ```
+
+## Upgrading from 0.14.x: OTA password → OTA encryption
+
+Since 0.15.0 the ESPHome OTA uses `encryption` (API key) instead of a password.
+Devices still running older firmware (password OTA) will reject a wireless install of the new config
+("device did not offer encryption; refusing to send the image in plaintext").
+
+One-time migration – pick one:
+
+1. Flash once over USB, or
+2. For a single wireless install, add to your device YAML:
+
+   ```yaml
+   ota:
+     - id: !extend ota_esphome
+       password: "<your old OTA password>"
+       allow_plaintext_upload: true
+   ```
+
+   After the device is running the new firmware, remove this block and install again.

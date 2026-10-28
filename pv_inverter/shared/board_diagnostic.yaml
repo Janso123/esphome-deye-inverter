@@ -1,0 +1,43 @@
+# Network-specific diagnostics (WiFi signal/SSID/IP or Ethernet IP/DNS/MAC) live in
+# pv_inverter/packages/network_*.yaml in this fork, so this file stays network-agnostic.
+
+debug:
+  update_interval: 60s
+
+sensor:
+  - platform: uptime
+    name: Uptime
+    device_id: esp_board
+    id: esp_uptime
+    type: seconds
+    icon: mdi:timer-check
+    update_interval: 60s
+    entity_category: diagnostic
+  - platform: debug
+    free:
+      name: Heap Free
+      device_id: esp_board
+      id: esp_heap_free
+      icon: mdi:memory
+      entity_category: diagnostic
+    block:
+      name: Heap Max Block
+      device_id: esp_board
+      id: esp_heap_max_block
+      icon: mdi:memory
+      entity_category: diagnostic
+    loop_time:
+      name: Loop Time
+      device_id: esp_board
+      id: esp_loop_time
+      icon: mdi:reload
+      entity_category: diagnostic
+    cpu_frequency:
+      name: CPU Frequency
+      device_id: esp_board
+      id: esp_cpu_frequency
+      icon: mdi:cpu-32-bit
+      unit_of_measurement: "MHz"
+      filters:
+        - multiply: 0.000001
+      entity_category: diagnostic

@@ -28,6 +28,7 @@ This project automatically integrates with Home Assistant through the ESPHome AP
 - **Power Limits**: Maximum selling and charging power settings
 - **Generator**: Control and monitoring (if connected)
 - **Time Synchronization** (3P only): Automatic and Manual time sync. Button available in Home Assistant
+- **Grid Settings** (3P only, opt-in): Grid protection, reconnect/trip limits, grid-support curves (P(U), Q(U), P(f), Q(P), PF(P)), and LVRT/HVRT as a separate Home Assistant device. Writes are locked until **Allow Changes (AT YOUR OWN RISK)** is turned on.
 
 ### Time of Use "All" Entities
 The system includes convenient "All" entities that allow you to control all Time of Use windows simultaneously:
@@ -51,7 +52,7 @@ The system includes convenient "All" entities that allow you to control all Time
 The system includes comprehensive safety mechanisms:
 
 1. **Connection Monitoring**: Continuously monitors connection to Home Assistant
-2. **Safe Mode Transition**: Automatically applies safe operating parameters when disconnected for more than 10 minutes
+2. **Safe Mode Transition**: Automatically applies safe operating parameters when disconnected for more than 10 minutes. The target values are editable under the **Config** sub-device in Home Assistant (`{friendly_name} Config`)
 3. **Parameter Validation**: All settings are validated against safe operating ranges
 4. **Fallback Access**: Emergency WiFi hotspot with configurable password
 5. **Hardware Protection**: Modbus communication timeouts and error handling

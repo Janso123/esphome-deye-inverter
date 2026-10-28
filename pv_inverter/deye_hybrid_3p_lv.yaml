@@ -46,6 +46,8 @@ substitutions:
 
 packages:
   - !include packages/init.yaml
+  - !include shared/safe_mode_params.yaml
+  - !include shared/board_diagnostic.yaml
   - ${ network_mode == "ethernet" and network_ethernet_package or network_wifi_package }
   - ${ network_mode == "ethernet" and ethernet_manual_ip_enabled and network_ethernet_manual_ip_package or {} }
   - ${ network_mode == "ethernet" and ethernet_use_address_enabled and network_ethernet_use_address_package or {} }
@@ -68,14 +70,28 @@ script:
           format: "Setting safe Modbus register values"
       - number.set:
           id: maximum_battery_charge_current
-          value: ${default_maximum_battery_charge_current}
+          value: !lambda "return id(safe_mode_max_battery_charge_current).state;"
       - number.set:
           id: max_sell_power
-          value: ${default_max_sell_power}
+          value: !lambda "return id(safe_mode_max_sell_power).state;"
       - select.set:
           id: system_work_mode
-          option: ${default_system_work_mode}
-      - switch.turn_${default_solar_sell}:
-          id: switch_solar_sell
-      - switch.turn_${default_force_off_grid}:
-          id: switch_off_grid
+          option: !lambda "return id(safe_mode_system_work_mode).current_option();"
+      - if:
+          condition:
+            lambda: 'return id(safe_mode_solar_sell).current_option() == "on";'
+          then:
+            - switch.turn_on:
+                id: switch_solar_sell
+          else:
+            - switch.turn_off:
+                id: switch_solar_sell
+      - if:
+          condition:
+            lambda: 'return id(safe_mode_force_off_grid).current_option() == "on";'
+          then:
+            - switch.turn_on:
+                id: switch_off_grid
+          else:
+            - switch.turn_off:
+                id: switch_off_grid
