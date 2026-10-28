@@ -39,9 +39,9 @@ substitutions:
   # Safe Mode parameters for supported inverters
   safe_mode_delay: 600s # Time after which transition to safe mode and setting default operating parameters will occur
   default_maximum_battery_charge_current: "130" # Amps
-  default_max_sell_power: "6000" # Watts
-  default_system_work_mode: "Zero Export To Load" # "Selling First", "Zero Export To Load", "Zero Export To CT"
-  default_solar_sell: "on" # "on", "off"
+  default_max_sell_power: "0" # Watts
+  default_system_work_mode: "Zero Export To CT" # "Selling First", "Zero Export To Load", "Zero Export To CT"
+  default_solar_sell: "off" # "on", "off"
 
 packages:
   pv_inverter: !include pv_inverter/deye_hybrid_1p_lv.yaml

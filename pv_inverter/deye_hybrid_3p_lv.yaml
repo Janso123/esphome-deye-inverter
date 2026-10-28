@@ -38,10 +38,12 @@ substitutions:
   network_ethernet_manual_ip_package: !include packages/network_ethernet_manual_ip.yaml
   network_ethernet_use_address_package: !include packages/network_ethernet_use_address.yaml
   # Safe Mode Default parameters
-  default_maximum_battery_charge_current: "140" # Amps
-  default_max_sell_power: "12000" # Watts
-  default_system_work_mode: "Zero Export To Load" # "Selling First", "Zero Export To Load", "Zero Export To CT"
-  default_solar_sell: "on" # "on", "off"
+  default_maximum_battery_charge_current: "100" # Amps
+  default_max_sell_power: "0" # Watts
+  default_system_work_mode: "Zero Export To CT" # "Selling First", "Zero Export To Load", "Zero Export To CT"
+  default_solar_sell: "off" # "on", "off"
+  # Hard block: safe mode never enables export unless set to "true" (requires grid operator permission)
+  safe_mode_allow_export: "false"
   default_force_off_grid: "off" # "on", "off"
 
 packages:
@@ -73,13 +75,16 @@ script:
           value: !lambda "return id(safe_mode_max_battery_charge_current).state;"
       - number.set:
           id: max_sell_power
-          value: !lambda "return id(safe_mode_max_sell_power).state;"
+          value: !lambda "return ${safe_mode_allow_export} ? id(safe_mode_max_sell_power).state : 0.0f;"
       - select.set:
           id: system_work_mode
-          option: !lambda "return id(safe_mode_system_work_mode).current_option();"
+          option: !lambda |-
+            std::string mode = id(safe_mode_system_work_mode).current_option().str();
+            if (!${safe_mode_allow_export} && mode == "Selling First") return std::string("Zero Export To CT");
+            return mode;
       - if:
           condition:
-            lambda: 'return id(safe_mode_solar_sell).current_option() == "on";'
+            lambda: 'return ${safe_mode_allow_export} && id(safe_mode_solar_sell).current_option() == "on";'
           then:
             - switch.turn_on:
                 id: switch_solar_sell

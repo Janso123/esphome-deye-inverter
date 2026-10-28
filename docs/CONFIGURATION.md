@@ -48,10 +48,11 @@ Safe mode defaults are exposed in Home Assistant on the **Config** sub-device (`
 | Parameter | Description | Default | Required | Supported Inverters |
 |-----------|-------------|---------|----------|---------------------|
 | `safe_mode_delay` | Delay before activating safe mode when disconnected | `600s` | No | All (1P/3P) |
-| `default_maximum_battery_charge_current` | Maximum battery charge current in safe mode | `140` | No | All (1P/3P) |
-| `default_max_sell_power` | Maximum power export in safe mode | `12000` | No | All (1P/3P) |
-| `default_system_work_mode` | System work mode in safe mode | `"Zero Export To Load"` | No | All (1P/3P) |
-| `default_solar_sell` | Solar selling state in safe mode | `"on"` | No | All (1P/3P) |
+| `default_maximum_battery_charge_current` | Maximum battery charge current in safe mode | `100` (3P LV), `130` (1P) | No | All (1P/3P) |
+| `default_max_sell_power` | Maximum power export in safe mode | `0` (no export) | No | All (1P/3P) |
+| `default_system_work_mode` | System work mode in safe mode | `"Zero Export To CT"` | No | All (1P/3P) |
+| `default_solar_sell` | Solar selling state in safe mode | `"off"` | No | All (1P/3P) |
+| `safe_mode_allow_export` | Hard block: when `"false"`, safe mode always forces Solar Sell off, Max Sell Power 0 and never selects "Selling First", whatever the Safe Mode entities in HA say. Set `"true"` only with grid operator permission to export | `"false"` | No | All (1P/3P) |
 | `default_force_off_grid` | Force Off Grid switch state in safe mode | `"off"` | No | 3P only (SG0XLP3, SG0XHP3) |
 | `enable_sync_time` | Enable automatic time synchronization with Home Assistant | `false` | No | 3P only (SG0XLP3, SG0XHP3) |
 
