@@ -149,7 +149,8 @@ One-time migration – pick one:
    ota:
      - id: !extend ota_esphome
        password: "<your old OTA password>"
-       allow_plaintext_upload: true
+       encryption:
+         allow_plaintext_upload: true
    ```
 
    After the device is running the new firmware, remove this block and install again.
